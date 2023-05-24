@@ -13,7 +13,14 @@ export default {
 		AppCard,
 	},
 
-	// methods: {
+	methods: {
+		getLanguage(code) {
+			const lang = new Intl.DisplayNames(["it"], {type: "language"});
+			const languageName = lang.of(code);
+			return languageName.charAt(0).toUpperCase() + languageName.slice(1);
+		},
+	},
+
 	// 	MovieCardValues() {
 	// 		const title = store.movies.title;
 	// 		console.log(title);
@@ -29,7 +36,10 @@ export default {
 				<AppCard
 					:title="movie.title"
 					:originalTitle="movie.original_title"
-					:lang="movie.original_language"
+					:lang="[
+						movie.original_language,
+						getLanguage(movie.original_language),
+					]"
 					:rating="movie.vote_average" />
 			</div>
 		</div>

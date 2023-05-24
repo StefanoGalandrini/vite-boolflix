@@ -10,7 +10,7 @@ export default {
 			required: true,
 		},
 		lang: {
-			type: String,
+			type: Array,
 			required: true,
 		},
 		rating: {
@@ -33,7 +33,7 @@ export default {
 		</div>
 		<div class="element">
 			<p class="key">Lingua:</p>
-			<p class="value">{{ lang }}</p>
+			<p class="value">{{ lang[1] }}</p>
 		</div>
 		<div class="element">
 			<p class="key">Voto:</p>
