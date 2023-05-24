@@ -11,6 +11,8 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {far} from "@fortawesome/free-regular-svg-icons";
 
+/* import flags library */
+
 /* add icons to the library */
 library.add(fas, far);
 

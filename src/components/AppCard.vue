@@ -1,4 +1,7 @@
 <script>
+/* import flags library */
+import CountryFlag from "vue-country-flag-next";
+
 export default {
 	props: {
 		title: {
@@ -18,6 +21,10 @@ export default {
 			required: true,
 		},
 	},
+
+	components: {
+		CountryFlag,
+	},
 };
 </script>
 
@@ -33,22 +40,23 @@ export default {
 		</div>
 		<div class="element">
 			<p class="key">Lingua:</p>
-			<p class="value">{{ lang[1] }}</p>
+			<country-flag :country="lang[0]" size="big" class="flag" />
+			<span class="value">{{ lang[1] }}</span>
 		</div>
 		<div class="element">
 			<p class="key">Voto:</p>
 			<p class="value">{{ rating }}</p>
 		</div>
 	</div>
-	<!-- <font-awesome-icon :icon="['fas', 'star']" />
-	<font-awesome-icon :icon="['far', 'star']" /> -->
+	<!-- <font-awesome-icon :icon="['fas', 'star']" /> -->
+	<!-- <font-awesome-icon :icon="['far', 'star']" /> -->
 </template>
 
 <style lang="scss" scoped>
 .card {
 	border: 1px solid black;
 	padding: 0.5rem;
-	height: 30vh;
+	height: 35vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -57,11 +65,18 @@ export default {
 	.element {
 		margin-bottom: 1rem;
 		.key {
+			font-size: 0.9rem;
 			color: lightblue;
 		}
 
+		.flag {
+			margin-right: 1ch;
+			margin-top: 1ch;
+			box-shadow: 0 0 1px 2px grey;
+		}
+
 		.value {
-			font-size: 1.2rem;
+			font-size: 1rem;
 			font-weight: bold;
 		}
 	}

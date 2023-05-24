@@ -14,6 +14,12 @@ export default {
 	},
 
 	methods: {
+		isEnglish(code) {
+			let isoLang = "";
+			code === "en" ? (isoLang = "us") : (isoLang = code);
+			return isoLang;
+		},
+
 		getLanguage(code) {
 			const lang = new Intl.DisplayNames(["it"], {type: "language"});
 			const languageName = lang.of(code);
@@ -37,7 +43,7 @@ export default {
 					:title="movie.title"
 					:originalTitle="movie.original_title"
 					:lang="[
-						movie.original_language,
+						isEnglish(movie.original_language),
 						getLanguage(movie.original_language),
 					]"
 					:rating="movie.vote_average" />
@@ -59,11 +65,10 @@ export default {
 		font-size: 1rem;
 		display: flex;
 		flex-wrap: wrap;
-		// grid-auto-flow: column;
 		gap: 1rem;
 
 		.cards {
-			width: calc((100% - 5rem) / 6);
+			width: calc((100% - 4rem) / 5);
 		}
 	}
 }
