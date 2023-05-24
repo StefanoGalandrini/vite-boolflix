@@ -10,6 +10,7 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 /* import specific icons */
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {far} from "@fortawesome/free-regular-svg-icons";
+import {faStar, faStarHalfAlt} from "@fortawesome/free-solid-svg-icons";
 
 /* import flags library */
 

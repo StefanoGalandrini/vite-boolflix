@@ -1,4 +1,5 @@
 <script>
+import AppRating from "./AppRating.vue";
 /* import flags library */
 import CountryFlag from "vue-country-flag-next";
 
@@ -24,6 +25,7 @@ export default {
 
 	components: {
 		CountryFlag,
+		AppRating,
 	},
 };
 </script>
@@ -47,16 +49,16 @@ export default {
 			<p class="key">Voto:</p>
 			<p class="value">{{ rating }}</p>
 		</div>
+
+		<AppRating :value="rating" />
 	</div>
-	<!-- <font-awesome-icon :icon="['fas', 'star']" /> -->
-	<!-- <font-awesome-icon :icon="['far', 'star']" /> -->
 </template>
 
 <style lang="scss" scoped>
 .card {
 	border: 1px solid black;
 	padding: 0.5rem;
-	height: 35vh;
+	height: 40vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

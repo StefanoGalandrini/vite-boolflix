@@ -27,7 +27,6 @@ export default {
 			const query = this.inputSearch.split(" ").join("+");
 			const language = "it-IT";
 			const moviesUrl = `${endpoint}&query=${query}&language=${language}`;
-			console.log(moviesUrl);
 			axios
 				.get(moviesUrl)
 				.then((response) => (this.store.movies = response.data.results));
