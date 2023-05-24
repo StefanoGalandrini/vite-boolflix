@@ -28,20 +28,19 @@ export default {
 			const language = "it-IT";
 			const moviesUrl = `${endpoint}&query=${query}&language=${language}`;
 			console.log(moviesUrl);
-			axios.get(moviesUrl).then((response) => {
-				this.store.movies = response;
-				console.log(this.store.movies);
-			});
+			axios
+				.get(moviesUrl)
+				.then((response) => (this.store.movies = response.data.results));
 		},
 	},
 };
 </script>
 
 <template>
-	<AppHeader @title="searchMovieTitle" />{{ this.inputSearch }}
+	<AppHeader @title="searchMovieTitle" />
 
 	<AppMainMovies />
-	<AppMainSeries />
+	<!-- <AppMainSeries /> -->
 </template>
 
 <style lang="scss">
