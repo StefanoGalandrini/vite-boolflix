@@ -1,5 +1,6 @@
 <script>
 import AppCard from "./AppCard.vue";
+import AppTemp from "./Temp.vue";
 import {store} from "../store";
 
 export default {
@@ -71,7 +72,7 @@ h1 {
 		gap: 1rem;
 
 		.cards {
-			width: calc((100% - 3rem) / 3);
+			width: calc((100% - 2rem) / 3);
 		}
 	}
 }

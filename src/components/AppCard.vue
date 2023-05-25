@@ -35,72 +35,108 @@ export default {
 </script>
 
 <template>
-	<div class="card">
-		<img :src="poster" alt="POSTER" />
-		<div class="element">
-			<p class="key">Titolo:</p>
-			<p class="value">{{ title }}</p>
-		</div>
-		<div class="element">
-			<p class="key">Titolo Originale:</p>
-			<p class="value">{{ originalTitle }}</p>
-		</div>
-		<div class="element">
-			<div>
-				<p class="key">Lingua:</p>
-				<p class="value">{{ lang[1] }}</p>
+	<div class="scene">
+		<div class="card">
+			<div class="card__face card__face--front">
+				<img :src="poster" alt="POSTER" />
 			</div>
-			<country-flag :country="lang[0]" size="big" class="flag" />
-		</div>
-		<div class="element">
-			<p class="key">Voto:</p>
-			<p class="value">{{ rating }}</p>
-			<AppRating class="rating" :value="rating" />
+			<div class="card__face card__face--back">
+				<ul>
+					<li class="element">
+						<p class="key">Titolo:</p>
+						<p class="value">{{ title }}</p>
+					</li>
+					<li class="element">
+						<p class="key">Titolo Originale:</p>
+						<p class="value">{{ originalTitle }}</p>
+					</li>
+					<li class="element">
+						<div>
+							<p class="key">Lingua:</p>
+							<p class="value">{{ lang[1] }}</p>
+						</div>
+						<country-flag :country="lang[0]" size="big" class="flag" />
+					</li>
+					<li class="element">
+						<p class="key">Voto:</p>
+						<p class="value">{{ rating }}</p>
+						<AppRating class="rating" :value="rating" />
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.card {
-	border: 1px solid black;
-	padding: 0.5rem;
-	height: 90vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	background: #222222;
-	box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.5);
+.scene {
+	perspective: 1000rem;
 
-	img {
+	.card {
+		position: relative;
+		width: 100%;
 		aspect-ratio: 2 / 3;
-		object-fit: cover;
-	}
-	.element {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin: 1rem 1rem;
-		.key {
-			font-size: 0.9rem;
-			color: lightblue;
-			margin-top: 0.5rem;
+		background: #222222;
+		border: 1px solid black;
+		box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.5);
+		transition: 1s ease-in-out;
+		transform-style: preserve-3d;
+		backface-visibility: hidden;
+
+		.card__face {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #222222;
+			box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.5);
+			backface-visibility: hidden;
+			transition: 1s ease-in-out;
+
+			&--back {
+				transform: rotateY(0.5turn);
+			}
+
+			img {
+				width: 100%;
+				aspect-ratio: 2 / 3;
+				object-fit: cover;
+			}
 		}
 
-		.flag {
-			text-align: right;
-			margin-left: 2rem;
-			margin-top: 1ch;
-			box-shadow: 0 0 1px 2px grey;
+		.element {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			margin: 1rem 1rem;
+
+			.key {
+				font-size: 0.9rem;
+				color: lightblue;
+				margin-top: 0.5rem;
+			}
+
+			.flag {
+				text-align: right;
+				margin-left: 2rem;
+				margin-top: 1ch;
+				box-shadow: 0 0 1px 2px grey;
+			}
+
+			.value {
+				font-size: 1rem;
+				font-weight: bold;
+				margin-top: 0.5rem;
+			}
+
+			.rating {
+				margin-left: 1rem;
+			}
 		}
 
-		.value {
-			font-size: 1rem;
-			font-weight: bold;
-			margin-top: 0.5rem;
-		}
-
-		.rating {
-			margin-left: 1rem;
+		&:hover {
+			transform: rotateY(0.5turn);
 		}
 	}
 }

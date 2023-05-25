@@ -43,32 +43,12 @@ export default {
 				.get(seriesUrl)
 				.then((response) => (this.store.series = response.data.results));
 		},
-
-		// loadPosterImage(value) {
-		// 	console.log("VALUE:", value);
-		// 	const endpoint = store.baseUrl;
-		// 	const posterWidth = "w350";
-		// 	const language = "it-IT";
-		// 	value.forEach((element) => {
-		// 		console.log("sono qui", element);
-		// 		if (element.poster_path) {
-		// 			console.log("ELEM: ", element.poster_path);
-		// 			const query = element.poster_path;
-		// 			const posterUrl = `${endpoint}${posterWidth}${query}&language=${language}`;
-		// 			axios
-		// 				.get(posterUrl)
-		// 				.then((response) => this.store.posters.push(response.data.results));
-		// 			console.log(posterUrl);
-		// 		}
-		// 	});
-		// },
 	},
 };
 </script>
 
 <template>
 	<AppHeader @title="searchMovieTitle" @series="searchSeriesTitle" />
-
 	<AppMainMovies />
 	<AppMainSeries />
 </template>
