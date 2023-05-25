@@ -4,6 +4,10 @@ import AppRating from "./AppRating.vue";
 import CountryFlag from "vue-country-flag-next";
 
 export default {
+	data() {
+		return {};
+	},
+
 	props: {
 		title: {
 			type: String,
@@ -38,7 +42,11 @@ export default {
 	<div class="scene">
 		<div class="card">
 			<div class="card__face card__face--front">
-				<img :src="poster" alt="POSTER" />
+				<img
+					v-if="poster.endsWith('null')"
+					src="../assets/img/not-found.webp"
+					alt="POSTER" />
+				<img v-else :src="poster" alt="POSTER" />
 			</div>
 			<div class="card__face card__face--back">
 				<ul>

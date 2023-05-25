@@ -1,12 +1,12 @@
 <script>
 import AppCard from "./AppCard.vue";
-import AppTemp from "./Temp.vue";
 import {store} from "../store";
 
 export default {
 	data() {
 		return {
 			store,
+			propsObj: {},
 		};
 	},
 
