@@ -6,7 +6,6 @@ export default {
 	data() {
 		return {
 			store,
-			propsObj: {},
 		};
 	},
 
@@ -43,7 +42,8 @@ export default {
 						getLanguage(movie.original_language),
 					]"
 					:rating="movie.vote_average"
-					:poster="store.baseUrl + movie.poster_path" />
+					:poster="store.baseUrl + movie.poster_path"
+					:overview="movie.overview" />
 			</div>
 		</div>
 	</div>

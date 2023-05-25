@@ -29,6 +29,10 @@ export default {
 			type: String,
 			required: true,
 		},
+		overview: {
+			type: String,
+			required: true,
+		},
 	},
 
 	components: {
@@ -64,6 +68,10 @@ export default {
 							<p class="value">{{ lang[1] }}</p>
 						</div>
 						<country-flag :country="lang[0]" size="big" class="flag" />
+					</li>
+					<li class="over">
+						<p class="key">Riassunto:</p>
+						<p class="value">{{ overview }}</p>
 					</li>
 					<li class="element">
 						<p class="key">Voto:</p>
@@ -140,6 +148,26 @@ export default {
 
 			.rating {
 				margin-left: 1rem;
+			}
+		}
+
+		.over {
+			display: block;
+			margin: 1rem 1rem;
+			max-height: 20ch;
+			overflow: auto;
+
+			.key {
+				font-size: 0.9rem;
+				color: lightblue;
+				margin-top: 0.5rem;
+			}
+
+			.value {
+				font-size: 0.9rem;
+				font-weight: 400;
+				color: lightgray;
+				margin-top: 0.5rem;
 			}
 		}
 

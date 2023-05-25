@@ -42,7 +42,8 @@ export default {
 						getLanguage(series.original_language),
 					]"
 					:rating="series.vote_average"
-					:poster="store.baseUrl + series.poster_path" />
+					:poster="store.baseUrl + series.poster_path"
+					:overview="series.overview" />
 			</div>
 		</div>
 	</div>
