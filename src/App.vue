@@ -30,6 +30,7 @@ export default {
 			axios
 				.get(moviesUrl)
 				.then((response) => (this.store.movies = response.data.results));
+			this.loadPosterImage(this.store.movies);
 		},
 
 		searchSeriesTitle(value) {
@@ -39,10 +40,28 @@ export default {
 			const query = this.inputSearch.split(" ").join("+");
 			const language = "it-IT";
 			const seriesUrl = `${endpoint}&query=${query}&language=${language}`;
-			console.log(seriesUrl);
 			axios
 				.get(seriesUrl)
 				.then((response) => (this.store.series = response.data.results));
+			this.loadPosterImage(this.store.series);
+		},
+
+		loadPosterImage(value) {
+			console.log("VALUE:", value);
+			const endpoint = store.baseUrl;
+			const posterWidth = "w350";
+			const language = "it-IT";
+			value.forEach((element) => {
+				console.log("sono qui", element);
+				if (element.posterPath) {
+					const query = element.posterPath;
+					const posterUrl = `${endpoint}${posterWidth}&query=${query}&language=${language}`;
+					axios
+						.get(posterUrl)
+						.then((response) => this.store.posters.push(response.data.results));
+					console.log(posterUrl);
+				}
+			});
 		},
 	},
 };

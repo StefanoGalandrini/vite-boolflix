@@ -34,7 +34,6 @@ export default {
 		<h1>TV SERIES</h1>
 		<div class="content">
 			<div v-for="series in store.series" :key="series.id" class="cards">
-				<!-- console.log(series.original_language, series.origin_country[0]); -->
 				<AppCard
 					:title="series.name"
 					:originalTitle="series.original_name"
