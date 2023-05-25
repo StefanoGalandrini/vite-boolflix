@@ -26,17 +26,12 @@ export default {
 			return languageName.charAt(0).toUpperCase() + languageName.slice(1);
 		},
 	},
-
-	// 	MovieCardValues() {
-	// 		const title = store.movies.title;
-	// 		console.log(title);
-	// 	},
-	// },
 };
 </script>
 
 <template>
 	<div class="container">
+		<h1>MOVIES</h1>
 		<div class="content">
 			<div v-for="movie in store.movies" :key="movie.id" class="cards">
 				<AppCard
@@ -54,6 +49,12 @@ export default {
 
 <style lang="scss" scoped>
 @use "../assets/styles/partials/variables" as *;
+
+h1 {
+	font-weight: 800;
+	color: black;
+	text-align: center;
+}
 .container {
 	background-color: $bgGray;
 

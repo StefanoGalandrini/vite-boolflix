@@ -31,15 +31,28 @@ export default {
 				.get(moviesUrl)
 				.then((response) => (this.store.movies = response.data.results));
 		},
+
+		searchSeriesTitle(value) {
+			this.inputSearch = value;
+			const endpoint =
+				"https://api.themoviedb.org/3/search/tv?api_key=d3e8524b6cb601e8d53a4fb415a08a48";
+			const query = this.inputSearch.split(" ").join("+");
+			const language = "it-IT";
+			const seriesUrl = `${endpoint}&query=${query}&language=${language}`;
+			console.log(seriesUrl);
+			axios
+				.get(seriesUrl)
+				.then((response) => (this.store.series = response.data.results));
+		},
 	},
 };
 </script>
 
 <template>
-	<AppHeader @title="searchMovieTitle" />
+	<AppHeader @title="searchMovieTitle" @series="searchSeriesTitle" />
 
 	<AppMainMovies />
-	<!-- <AppMainSeries /> -->
+	<AppMainSeries />
 </template>
 
 <style lang="scss">

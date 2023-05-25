@@ -13,6 +13,7 @@ export default {
 		emitInputSearch(event) {
 			event.preventDefault();
 			this.$emit("title", this.inputSearch);
+			this.$emit("series", this.inputSearch);
 		},
 	},
 };
