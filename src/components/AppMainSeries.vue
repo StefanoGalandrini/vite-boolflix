@@ -41,7 +41,8 @@ export default {
 						isEnglish(series.original_language, series.origin_country[0]),
 						getLanguage(series.original_language),
 					]"
-					:rating="series.vote_average" />
+					:rating="series.vote_average"
+					:poster="store.baseUrl + series.poster_path" />
 			</div>
 		</div>
 	</div>
@@ -56,6 +57,7 @@ export default {
 		font-weight: 800;
 		color: black;
 		text-align: center;
+		padding-top: 1.5rem;
 	}
 	.content {
 		width: 70vw;
@@ -68,7 +70,7 @@ export default {
 		gap: 1rem;
 
 		.cards {
-			width: calc((100% - 4rem) / 5);
+			width: calc((100% - 3rem) / 3);
 		}
 	}
 }

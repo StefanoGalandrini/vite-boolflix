@@ -41,7 +41,8 @@ export default {
 						isEnglish(movie.original_language),
 						getLanguage(movie.original_language),
 					]"
-					:rating="movie.vote_average" />
+					:rating="movie.vote_average"
+					:poster="store.baseUrl + movie.poster_path" />
 			</div>
 		</div>
 	</div>
@@ -54,6 +55,7 @@ h1 {
 	font-weight: 800;
 	color: black;
 	text-align: center;
+	padding-top: 1.5rem;
 }
 .container {
 	background-color: $bgGray;
@@ -69,7 +71,7 @@ h1 {
 		gap: 1rem;
 
 		.cards {
-			width: calc((100% - 4rem) / 5);
+			width: calc((100% - 3rem) / 3);
 		}
 	}
 }
