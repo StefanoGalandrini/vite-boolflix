@@ -20,16 +20,27 @@ export default {
 	},
 
 	methods: {
-		searchMovieTitle(value) {
+		async searchMovieTitle(value) {
 			this.inputSearch = value;
 			const endpoint =
 				"https://api.themoviedb.org/3/search/movie?api_key=d3e8524b6cb601e8d53a4fb415a08a48";
 			const query = this.inputSearch.split(" ").join("+");
 			const language = "it-IT";
 			const moviesUrl = `${endpoint}&query=${query}&language=${language}`;
-			axios
-				.get(moviesUrl)
-				.then((response) => (this.store.movies = response.data.results));
+			const response = await axios.get(moviesUrl);
+			this.store.movies = response.data.results;
+
+			//ricera nomi attori
+			this.store.movies.forEach(async (movie) => {
+				const movieId = movie.id;
+				const creditsEndpoint = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=d3e8524b6cb601e8d53a4fb415a08a48&language=it-IT`;
+
+				const castResponse = await axios.get(creditsEndpoint);
+
+				const cast = castResponse.data.cast.slice(0, 5);
+				movie.cast = cast.map((member) => member.name);
+			});
+			console.log(this.store.movies);
 		},
 
 		searchSeriesTitle(value) {

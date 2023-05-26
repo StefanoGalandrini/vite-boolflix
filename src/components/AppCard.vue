@@ -67,14 +67,13 @@ export default {
 							dataProps.genres.filter((genre) => genre).join(", ")
 						}}</span>
 					</li>
-					<li class="element">
+					<li class="over">
 						<p class="key">Protagonisti principali:</p>
-						<!-- <ul>
-							<li v-for="actor in actors" :key="actor">{{ actor }}</li>
-						</ul> -->
-
+						<span class="value" :key="actor">
+							<!-- {{ actor }} -->
+							{{ dataProps.actors.filter((actor) => actor).join(", ") }}
+						</span>
 						<!-- <span class="value">{{
-							dataProps.actors.filter((name) => name).join(", ")
 						}}</span> -->
 					</li>
 				</ul>

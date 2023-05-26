@@ -1,6 +1,5 @@
 <script>
 import AppCard from "./AppCard.vue";
-import axios from "axios";
 import {store} from "../store";
 
 export default {
@@ -33,21 +32,6 @@ export default {
 				return genre ? genre.name : "";
 			});
 		},
-
-		getActors(id) {
-			let actorsByMovieId = {};
-			axios
-				.get(
-					`https://api.themoviedb.org/3/movie/${id}/credits?api_key=d3e8524b6cb601e8d53a4fb415a08a48&language=it-IT`,
-				)
-				.then((response) => {
-					actorsByMovieId[id] = response.data.cast
-						.slice(0, 5)
-						.map((actor) => actor.name);
-				});
-
-			store.actorsByMovieId = actorsByMovieId;
-		},
 	},
 };
 </script>
@@ -69,7 +53,7 @@ export default {
 						poster: store.baseUrl + movie.poster_path,
 						overview: movie.overview,
 						genres: getGenres(movie.genre_ids),
-						actors: getActors(movie.id),
+						actors: movie.cast,
 					}" />
 			</div>
 		</div>
