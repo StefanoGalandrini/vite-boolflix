@@ -69,14 +69,11 @@ export default {
 					</li>
 					<li class="over">
 						<p class="key">Protagonisti principali:</p>
-						<span class="value" :key="actor">
-							<!-- {{ actor }} -->
-							{{ dataProps.actors.filter((actor) => actor).join(", ") }}
-						</span>
-						<!-- <span class="value">{{
-						}}</span> -->
 					</li>
 				</ul>
+				<p class="value-alt" v-for="actor in dataProps.actors" :key="actor">
+					• {{ actor }}
+				</p>
 			</div>
 		</div>
 	</div>
@@ -167,6 +164,13 @@ export default {
 				color: lightgray;
 				margin-top: 0.5rem;
 			}
+		}
+
+		.value-alt {
+			font-size: 1rem;
+			font-weight: 400;
+			color: white;
+			margin-inline: 1.5rem;
 		}
 
 		&:hover {

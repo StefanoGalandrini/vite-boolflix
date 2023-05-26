@@ -34,25 +34,30 @@ export default {
 			this.store.movies.forEach(async (movie) => {
 				const movieId = movie.id;
 				const creditsEndpoint = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=d3e8524b6cb601e8d53a4fb415a08a48&language=it-IT`;
-
 				const castResponse = await axios.get(creditsEndpoint);
-
 				const cast = castResponse.data.cast.slice(0, 5);
 				movie.cast = cast.map((member) => member.name);
 			});
-			console.log(this.store.movies);
 		},
 
-		searchSeriesTitle(value) {
+		async searchSeriesTitle(value) {
 			this.inputSearch = value;
 			const endpoint =
 				"https://api.themoviedb.org/3/search/tv?api_key=d3e8524b6cb601e8d53a4fb415a08a48";
 			const query = this.inputSearch.split(" ").join("+");
 			const language = "it-IT";
 			const seriesUrl = `${endpoint}&query=${query}&language=${language}`;
-			axios
-				.get(seriesUrl)
-				.then((response) => (this.store.series = response.data.results));
+			const response = await axios.get(seriesUrl);
+			this.store.series = response.data.results;
+
+			//ricera nomi attori
+			this.store.series.forEach(async (item) => {
+				const seriesId = item.id;
+				const creditsEndpoint = `https://api.themoviedb.org/3/tv/${seriesId}/credits?api_key=d3e8524b6cb601e8d53a4fb415a08a48&language=it-IT`;
+				const castResponse = await axios.get(creditsEndpoint);
+				const cast = castResponse.data.cast.slice(0, 5);
+				item.cast = cast.map((member) => member.name);
+			});
 		},
 	},
 

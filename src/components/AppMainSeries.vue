@@ -53,7 +53,7 @@ export default {
 						poster: store.baseUrl + tvSeries.poster_path,
 						overview: tvSeries.overview,
 						genres: getGenres(tvSeries.genre_ids),
-						// actors: getActors(tvSeries.id),
+						actors: tvSeries.cast,
 					}" />
 			</div>
 		</div>
