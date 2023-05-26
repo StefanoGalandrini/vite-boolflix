@@ -1,5 +1,6 @@
 <script>
 import AppCard from "./AppCard.vue";
+import axios from "axios";
 import {store} from "../store";
 
 export default {
@@ -25,6 +26,28 @@ export default {
 			const languageName = lang.of(code);
 			return languageName.charAt(0).toUpperCase() + languageName.slice(1);
 		},
+
+		getGenres(genreIds) {
+			return genreIds.map((genreId) => {
+				const genre = store.genres.find((genre) => genre.id === genreId);
+				return genre ? genre.name : "";
+			});
+		},
+
+		getActors(id) {
+			let actorsByMovieId = {};
+			axios
+				.get(
+					`https://api.themoviedb.org/3/movie/${id}/credits?api_key=d3e8524b6cb601e8d53a4fb415a08a48&language=it-IT`,
+				)
+				.then((response) => {
+					actorsByMovieId[id] = response.data.cast
+						.slice(0, 5)
+						.map((actor) => actor.name);
+				});
+
+			store.actorsByMovieId = actorsByMovieId;
+		},
 	},
 };
 </script>
@@ -35,15 +58,19 @@ export default {
 		<div class="content">
 			<div v-for="movie in store.movies" :key="movie.id" class="cards">
 				<AppCard
-					:title="movie.title"
-					:originalTitle="movie.original_title"
-					:lang="[
-						isEnglish(movie.original_language),
-						getLanguage(movie.original_language),
-					]"
-					:rating="movie.vote_average"
-					:poster="store.baseUrl + movie.poster_path"
-					:overview="movie.overview" />
+					:dataProps="{
+						title: movie.title,
+						originalTitle: movie.original_title,
+						lang: [
+							isEnglish(movie.original_language),
+							getLanguage(movie.original_language),
+						],
+						rating: movie.vote_average,
+						poster: store.baseUrl + movie.poster_path,
+						overview: movie.overview,
+						genres: getGenres(movie.genre_ids),
+						actors: getActors(movie.id),
+					}" />
 			</div>
 		</div>
 	</div>

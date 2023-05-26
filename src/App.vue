@@ -44,6 +44,19 @@ export default {
 				.then((response) => (this.store.series = response.data.results));
 		},
 	},
+
+	mounted() {
+		{
+			axios
+				.get("https://api.themoviedb.org/3/genre/movie/list", {
+					params: {
+						api_key: "d3e8524b6cb601e8d53a4fb415a08a48",
+						language: "it-IT",
+					},
+				})
+				.then((response) => (this.store.genres = response.data.genres));
+		}
+	},
 };
 </script>
 

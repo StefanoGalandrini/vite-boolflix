@@ -1,5 +1,6 @@
 <script>
 import AppCard from "./AppCard.vue";
+import axios from "axios";
 import {store} from "../store";
 
 export default {
@@ -25,7 +26,35 @@ export default {
 			const languageName = lang.of(code);
 			return languageName.charAt(0).toUpperCase() + languageName.slice(1);
 		},
+
+		getGenres(genreIds) {
+			return genreIds.map((genreId) => {
+				const genre = store.genres.find((genre) => genre.id === genreId);
+				return genre ? genre.name : "";
+			});
+		},
+
+		getActors(id) {
+			let actorsByTVShowId = {};
+			axios
+				.get(
+					`https://api.themoviedb.org/3/tv/${id}/credits?api_key=d3e8524b6cb601e8d53a4fb415a08a48&language=it-IT`,
+				)
+				.then((response) => {
+					actorsByTVShowId[id] = response.data.cast
+						.slice(0, 5)
+						.map((actor) => actor.name);
+				});
+
+			store.actorsByTVShowId = actorsByTVShowId;
+		},
 	},
+
+	// computed: {
+	// 	series() {
+	// 		return store.series;
+	// 	},
+	// },
 };
 </script>
 
@@ -33,17 +62,21 @@ export default {
 	<div class="container">
 		<h1>TV SERIES</h1>
 		<div class="content">
-			<div v-for="series in store.series" :key="series.id" class="cards">
+			<div v-for="tvSeries in store.series" :key="tvSeries.id" class="cards">
 				<AppCard
-					:title="series.name"
-					:originalTitle="series.original_name"
-					:lang="[
-						isEnglish(series.original_language, series.origin_country[0]),
-						getLanguage(series.original_language),
-					]"
-					:rating="series.vote_average"
-					:poster="store.baseUrl + series.poster_path"
-					:overview="series.overview" />
+					:dataProps="{
+						title: tvSeries.name,
+						originalTitle: tvSeries.original_name,
+						lang: [
+							isEnglish(tvSeries.original_language, tvSeries.origin_country[0]),
+							getLanguage(tvSeries.original_language),
+						],
+						rating: tvSeries.vote_average,
+						poster: store.baseUrl + tvSeries.poster_path,
+						overview: tvSeries.overview,
+						genres: getGenres(tvSeries.genre_ids),
+						actors: getActors(tvSeries.id),
+					}" />
 			</div>
 		</div>
 	</div>

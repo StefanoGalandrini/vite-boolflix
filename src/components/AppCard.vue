@@ -9,28 +9,8 @@ export default {
 	},
 
 	props: {
-		title: {
-			type: String,
-			required: true,
-		},
-		originalTitle: {
-			type: String,
-			required: true,
-		},
-		lang: {
-			type: Array,
-			required: true,
-		},
-		rating: {
-			type: Number,
-			required: true,
-		},
-		poster: {
-			type: String,
-			required: true,
-		},
-		overview: {
-			type: String,
+		dataProps: {
+			type: Object,
 			required: true,
 		},
 	},
@@ -47,36 +27,55 @@ export default {
 		<div class="card">
 			<div class="card__face card__face--front">
 				<img
-					v-if="poster.endsWith('null')"
+					v-if="dataProps.poster.endsWith('null')"
 					src="../assets/img/not-found.webp"
 					alt="POSTER" />
-				<img v-else :src="poster" alt="POSTER" />
+				<img v-else :src="dataProps.poster" alt="POSTER" />
 			</div>
 			<div class="card__face card__face--back">
 				<ul>
 					<li class="element">
 						<p class="key">Titolo:</p>
-						<p class="value">{{ title }}</p>
+						<p class="value">{{ dataProps.title }}</p>
 					</li>
 					<li class="element">
 						<p class="key">Titolo Originale:</p>
-						<p class="value">{{ originalTitle }}</p>
+						<p class="value">{{ dataProps.originalTitle }}</p>
 					</li>
 					<li class="element">
 						<div>
 							<p class="key">Lingua:</p>
-							<p class="value">{{ lang[1] }}</p>
+							<p class="value">{{ dataProps.lang[1] }}</p>
 						</div>
-						<country-flag :country="lang[0]" size="big" class="flag" />
+						<country-flag
+							:country="dataProps.lang[0]"
+							size="big"
+							class="flag" />
 					</li>
 					<li class="over">
 						<p class="key">Riassunto:</p>
-						<p class="value">{{ overview }}</p>
+						<p class="value">{{ dataProps.overview }}</p>
 					</li>
 					<li class="element">
 						<p class="key">Voto:</p>
-						<p class="value">{{ rating }}</p>
-						<AppRating class="rating" :value="rating" />
+						<p class="value">{{ dataProps.rating }}</p>
+						<AppRating class="rating" :value="dataProps.rating" />
+					</li>
+					<li class="element">
+						<p class="key">Generi:</p>
+						<span class="value">{{
+							dataProps.genres.filter((genre) => genre).join(", ")
+						}}</span>
+					</li>
+					<li class="element">
+						<p class="key">Protagonisti principali:</p>
+						<!-- <ul>
+							<li v-for="actor in actors" :key="actor">{{ actor }}</li>
+						</ul> -->
+
+						<!-- <span class="value">{{
+							dataProps.actors.filter((name) => name).join(", ")
+						}}</span> -->
 					</li>
 				</ul>
 			</div>
@@ -164,7 +163,7 @@ export default {
 			}
 
 			.value {
-				font-size: 0.9rem;
+				font-size: 1rem;
 				font-weight: 400;
 				color: lightgray;
 				margin-top: 0.5rem;
